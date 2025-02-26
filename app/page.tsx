@@ -17,14 +17,14 @@ export default function Chat() {
   }, [messages]);
 
   return (
-    <div className="flex flex-col gap-2 w-full max-w-xl py-24 mx-auto">
+    <div className="relative p-4 min-h-dvh max-w-xl mx-auto flex flex-col h-full gap-2">
       {messages.map((m) => (
         <div
           key={m.id}
           ref={
             m.id === messages[messages.length - 1].id ? lastMessageRef : null
           }
-          className={`p-4 rounded-xl border dark:border-zinc-800 w-fit ${
+          className={`p-4 rounded-xl border dark:border-zinc-800 w-fit h-full ${
             m.role === "assistant" ? "bg-zinc-50 dark:bg-zinc-900" : "ml-auto"
           }`}
         >
@@ -35,9 +35,9 @@ export default function Chat() {
         </div>
       ))}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mt-auto">
         <input
-          className="fixed dark:bg-zinc-900 bottom-0 w-full max-w-xl px-4 py-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded-xl shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="dark:bg-zinc-900 w-full max-w-xl mx-auto px-4 py-2 border border-zinc-300 dark:border-zinc-800 rounded-xl shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
           value={input}
           disabled={status === "streaming"}
           placeholder="Digite algo..."
